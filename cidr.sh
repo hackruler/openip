@@ -24,9 +24,9 @@ if [ ! -r "$input_file" ]; then
         fi
 
 echo "[!] Finding open ports on all the ip's"
-sudo masscan $input_file -p1-65535 --rate=10000000 | anew ip1.txt /dev/null;
-cat ip1.txt | cut -d "o" -f5 | sed 's/n//g' | sed 's/^ *\|\ *$//g' | sed 's/$/:/' | tee -a ip_add.txt /dev/null;
-cat ip1.txt | cut -d "/" -f1 | cut -d ' ' -f4 | tee -a port.txt /dev/null;
+sudo masscan $input_file -p1-65535 --rate=10000000 | anew ip1.txt;
+cat ip1.txt | cut -d "o" -f5 | sed 's/n//g' | sed 's/^ *\|\ *$//g' | sed 's/$/:/' | tee -a ip_add.txt > /dev/null;
+cat ip1.txt | cut -d "/" -f1 | cut -d ' ' -f4 | tee -a port.txt > /dev/null;
 
 echo "[!] httpx is running on all the ip's found with respective ports"
 paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent -sc -td -cl | tee -a httpx_ip.txt;
