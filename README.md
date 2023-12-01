@@ -23,3 +23,26 @@ Or you can directly run as
 ![image](https://github.com/hackruler/c1dr/assets/82742964/ae49c0f6-b3c7-4ea3-8daf-7fa5fea7c70c)
 
 
+
+# More effectively you can use this like...
+
+After Installation
+
+**Make an alias using this-**
+
+Append this command in .zshrc file or .bashrc file
+
+`alias cidr='bash <path to file>/c1dr/cidr.sh`
+
+And then type this command to save...
+
+`source ~/.bashrc` Or `source ~/.zshrc`
+
+Then you can use this as...
+
+`cidr <domain file path>`
+
+# Example
+
+![image](https://github.com/hackruler/c1dr/assets/82742964/8d4047f3-fc93-476a-98da-8ef8787d6056)
+
