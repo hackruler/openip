@@ -7,4 +7,6 @@ Let's find all the working ip's in the CIDR range by finding their respective op
 `cd c1dr`
 
 # Usage
-`bash cidr.sh <cidr range file>`
+`chmod +x cidr.sh`
+
+`cidr.sh <path cidr file>`
