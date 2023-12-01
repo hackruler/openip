@@ -47,4 +47,4 @@ paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent -sc -td -cl | tee -a h
 rm ip_add.txt port.txt;
 echo -e "${GREEN}[*] httpx result is stored in httpx_ip.txt${NC}";
 echo -e "${GREEN}[**]" $(cat httpx_ip.txt | wc -l)" ip's giving any response on browser.${NC}";
-echo "....................Script Ended......................"
+echo "....................SCRIPT ENDED......................"
