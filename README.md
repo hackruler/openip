@@ -8,7 +8,7 @@ Let's find all the working ip's in the CIDR range by finding their respective op
 
 # Usage
 
-`bash cidr.sh <path to cidr file>`
+`bash cidr.sh -l <path to cidr file> [options]`
 
 #Example
 
@@ -31,7 +31,7 @@ And then type this command to save...
 
 Then you can use this as...
 
-`cidr <domain file path>`
+`cidr -l <domain file path> [options]`
 
 # Example
 
