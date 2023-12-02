@@ -6,6 +6,18 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+
+show_help() {
+    echo ""
+    echo "Usage: bash cidr.sh -l <cidr file> [options]"
+    echo "Options:"
+    echo "-h                          Help Menu"
+    echo "-l <input_file>             Specify the CIDR file you want to scan."
+    echo "-p[input_ports]             Specify the ports you want to scan (e.g., -p80,443 or -p1-65535)."
+    echo "                            If not Specified anyt port, It will scan for default ports."
+    exit 0
+}
+
 cexit() {
     echo -e "${RED}[!] Script interrupted. Exiting...${NC}"
     exit "$1"
@@ -15,17 +27,21 @@ trap 'cexit 1' SIGINT;
 
 default_ports="66,80,81,443,445,457,1080,1100,1241,1352,1433,1434,1521,1944,2301,3000,3128,3306,4000,4001,4002,4100,5000,5001,5432,5800,5801,5802,6346,6347,7001,7002,8080,8443,8888,30821" 
 
-while getopts "l:p:" opt; do
+
+while getopts ":l:p:h" opt; do
     case $opt in
         l)
             input_file="$OPTARG"
             ;;
         p)
             custom_ports="$OPTARG"
-            ;;
+            ;;   
+        h)
+            show_help
+            ;;         
         \?)
-            echo -e "${GREEN}Usage: bash $0 -l <input_file> [-p<ports>]${NC}"
-            cexit 1
+            echo -e "${RED}Invalid option.${NC}" 1>&2
+            show_help
             ;;
     esac
 done
