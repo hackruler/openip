@@ -79,30 +79,30 @@ fi
 
 if [ ! -f "$input_file" ]; then
     echo -e "${RED}Error: The specified input file '$input_file' is not present in the directory.${NC}"
-    cexit 1
+    exit 0
 fi
 
 if [ ! -s "$input_file" ]; then
     echo -e "${RED}Error: The specified input file '$input_file' is empty.${NC}"
-    cexit 1
+    exit 0
 fi
 
 if [ ! -r "$input_file" ]; then
     echo -e "${RED}Error: The specified input file '$input_file' is not readable.${NC}"
-    cexit 1
+    exit 0
 fi
 
 echo -e "${YELLOW}[!] Finding open ports on all the IP's.${NC}"
-sudo masscan -iL "$input_file" "$ports_option" --rate=10000000 | anew masscan.txt > /dev/null || cexit $?;
+sudo masscan -iL "$input_file" "$ports_option" --rate=10000000 | anew masscan.txt > /dev/null;
 echo -e "${GREEN}[**]" $(cat masscan.txt | wc -l)" IP's found with open ports.${NC}"
-cat masscan.txt | cut -d " " -f6 | sed 's/n//g' | sed 's/^ *\|\ *$//g' | sed 's/$/:/' | tee -a ip_add.txt > /dev/null || cexit $?;
-cat masscan.txt | cut -d "/" -f1 | cut -d 't' -f2 | sed 's/^ *//g' | tee -a port.txt > /dev/null || cexit $?;
+cat masscan.txt | cut -d " " -f6 | sed 's/n//g' | sed 's/^ *\|\ *$//g' | sed 's/$/:/' | tee -a ip_add.txt > /dev/null;
+cat masscan.txt | cut -d "/" -f1 | cut -d 't' -f2 | sed 's/^ *//g' | tee -a port.txt > /dev/null;
 
 echo -e "${YELLOW}[!] httpx is running on all the IP's found with respective ports.${NC}"
 if [ -z "$output_file" ]; then
-    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option || cexit $?
+    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option
 else
-    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option | tee -a "$output_file" || cexit $?
+    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option | tee -a "$output_file"
 fi
 
 rm ip_add.txt port.txt masscan.txt;
@@ -112,6 +112,3 @@ else
     echo -e "${GREEN}[*] httpx result is stored in "$output_file"${NC}"
     echo -e "${GREEN}[**]" $(cat "$output_file" | wc -l)" IP's giving any response on the browser.${NC}";
 fi
-
-
-echo "....................SCRIPT ENDED......................"
