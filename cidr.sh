@@ -94,6 +94,6 @@ echo -e "${YELLOW}[!] httpx is running on all the IP's found with respective por
 paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent -sc -td -cl | tee -a "$output_file" || cexit $?;
 
 rm ip_add.txt port.txt masscan.txt;
-echo -e "${GREEN}[*] httpx result is stored in httpx_ip.txt${NC}"
-echo -e "${GREEN}[**]" $(cat httpx_ip.txt | wc -l)" IP's giving any response on the browser.${NC}";
+echo -e "${GREEN}[*] httpx result is stored in "$output_file"${NC}"
+echo -e "${GREEN}[**]" $(cat "$output_file" | wc -l)" IP's giving any response on the browser.${NC}";
 echo "....................SCRIPT ENDED......................"
