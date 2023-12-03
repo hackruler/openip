@@ -35,7 +35,7 @@ default_ports="66,80,81,443,445,457,1080,1100,1241,1352,1433,1434,1521,1944,2301
 
 default_probes="-sc -cl -td -title"
 
-while getopts ":l:p:o:h:s:" opt; do
+while getopts ":l:p:o:s:h" opt; do
     case $opt in
         l)
             input_file="$OPTARG"
@@ -60,7 +60,6 @@ while getopts ":l:p:o:h:s:" opt; do
 done
 
 if [ -z "$input_file" ]; then
-    show_help
     exit 0
 fi
 
