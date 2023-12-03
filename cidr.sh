@@ -100,7 +100,7 @@ cat masscan.txt | cut -d "/" -f1 | cut -d 't' -f2 | sed 's/^ *//g' | tee -a port
 
 echo -e "${YELLOW}[!] httpx is running on all the IP's found with respective ports.${NC}"
 if [ -z "$output_file" ]; then
-    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option
+    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option || cexit $?
 else
     paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option | tee -a "$output_file" || cexit $?
 fi
