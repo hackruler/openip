@@ -12,7 +12,8 @@ Let's find all the working ip's in the CIDR range by finding their respective op
 
 #Example
 
-![image](https://github.com/hackruler/c1dr/assets/82742964/bd00c750-820b-4f45-bd1f-77ac02204944)
+![image](https://github.com/hackruler/c1dr/assets/82742964/89ce1de4-0280-471c-b4e5-6a788e7f0600)
+
 
 
 # More effectively you can use this like...
@@ -22,6 +23,8 @@ After Installation
 **Make an alias using this-**
 
 Append this command in .zshrc file or .bashrc file
+
+`chmod +x <file path>/cidr.sh`
 
 `alias cidr='bash <path to file>/c1dr/cidr.sh`
 
@@ -35,5 +38,6 @@ Then you can use this as...
 
 # Example
 
-![image](https://github.com/hackruler/c1dr/assets/82742964/8d4047f3-fc93-476a-98da-8ef8787d6056)
+![image](https://github.com/hackruler/c1dr/assets/82742964/954bc6a5-27bc-4d8c-a684-25836af978b5)
+
 
