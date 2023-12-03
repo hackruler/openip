@@ -1,9 +1,6 @@
 # Finding all the open ports for each ip in CIDR
 # Run httpx on all the ip's found with their respective ports.
 
-# Finding all the open ports for each ip in CIDR
-# Run httpx on all the ip's found with their respective ports.
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -19,7 +16,7 @@ show_help() {
     echo "-p[input_ports]             Specify the ports you want to scan (e.g., -p80,443 or -p1-65535)."
     echo "                            If not Specified anyt port, It will scan for default ports."
     echo "-o <output_file>            Specify the output file."
-    echo "-s "<httpx probes>"         Specify httpx probes you want to use (e.g., -s "-sc -cl -title -td")"
+    echo "-s <httpx probes>           Specify httpx probes you want to use (e.g., -s \"-sc -cl -title -td\")"
     echo "                            If not specified it will use some default probes"
 
     exit 0
@@ -112,4 +109,5 @@ else
     echo -e "${GREEN}[*] httpx result is stored in "$output_file"${NC}"
     echo -e "${GREEN}[**]" $(cat "$output_file" | wc -l)" IP's giving any response on the browser.${NC}";
 fi
+
 echo "....................SCRIPT ENDED......................"
