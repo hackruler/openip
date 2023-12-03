@@ -9,19 +9,18 @@ NC='\033[0m' # No Color
 
 show_help() {
     echo ""
-    echo "Usage: bash cidr.sh -l <cidr file> [options]"
-    echo "Options:"
-    echo "-h                          Help Menu"
-    echo "-l <input_file>             Specify the CIDR file you want to scan."
-    echo "-p[input_ports]             Specify the ports you want to scan (e.g., -p80,443 or -p1-65535)."
-    echo "                            If not Specified anyt port, It will scan for default ports."
-    echo "-o <output_file>            Specify the output file."
-    echo "-s <httpx probes>           Specify httpx probes you want to use (e.g., -s \"-sc -cl -title -td\")"
-    echo "                            If not specified it will use some default probes"
+    echo "   Usage: bash cidr.sh -l <cidr file> [options]"
+    echo "   Options:"
+    echo "   -h                          Help Menu"
+    echo "   -l <input_file>             Specify the CIDR file you want to scan."
+    echo "   -p[input_ports]             Specify the ports you want to scan (e.g., -p80,443 or -p1-65535)."
+    echo "                               If not Specified anyt port, It will scan for default ports."
+    echo "   -o <output_file>            Specify the output file."
+    echo "   -s <httpx probes>           Specify httpx probes you want to use (e.g., -s \"-sc -cl -title -td\")"
+    echo "                               If not specified it will use some default probes"
 
     exit 0
 }
-
 cexit() {
     echo -e "${RED}[!] Script interrupted. Exiting...${NC}"
     [ -e masscan.txt ] && rm -f masscan.txt
