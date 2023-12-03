@@ -10,7 +10,7 @@ Let's find all the working ip's in the CIDR range by finding their respective op
 
 `bash cidr.sh -l <path to cidr file> [options]`
 
-#Example
+# Example
 
 ![image](https://github.com/hackruler/c1dr/assets/82742964/89ce1de4-0280-471c-b4e5-6a788e7f0600)
 
