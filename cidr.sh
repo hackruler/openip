@@ -34,6 +34,7 @@ trap 'cexit 1' SIGINT;
 
 default_ports="66,80,81,443,445,457,1080,1100,1241,1352,1433,1434,1521,1944,2301,3000,3128,3306,4000,4001,4002,4100,5000,5001,5432,5800,5801,5802,6346,6347,7001,7002,8080,8443,8888,30821" 
 
+default_probes="-sc -cl -td -title"
 
 while getopts ":l:p:o:h:s:" opt; do
     case $opt in
@@ -47,8 +48,8 @@ while getopts ":l:p:o:h:s:" opt; do
             output_file="$OPTARG"
             ;;
         s)
-            httpx_probes="$OPTARG"
-            ;;  
+            httpx_probes="${OPTARG}" 
+            ;;
         h)
             show_help
             ;;             
@@ -71,7 +72,9 @@ else
 fi
 
 if [ -z "$httpx_probes" ]; then
-    httpx_probes="-cl -td -sc -title"  # Use default probes if not provided
+    probes_option="$default_probes"
+else
+    probes_option="$httpx_probes"
 fi
 
 if [ ! -f "$input_file" ]; then
@@ -97,9 +100,9 @@ cat masscan.txt | cut -d "/" -f1 | cut -d 't' -f2 | sed 's/^ *//g' | tee -a port
 
 echo -e "${YELLOW}[!] httpx is running on all the IP's found with respective ports.${NC}"
 if [ -z "$output_file" ]; then
-    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $httpx_probes
+    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option
 else
-    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $httpx_probes | tee -a "$output_file" || cexit $?
+    paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option | tee -a "$output_file" || cexit $?
 fi
 
 rm ip_add.txt port.txt masscan.txt;
@@ -109,5 +112,6 @@ else
     echo -e "${GREEN}[*] httpx result is stored in "$output_file"${NC}"
     echo -e "${GREEN}[**]" $(cat "$output_file" | wc -l)" IP's giving any response on the browser.${NC}";
 fi
+
 
 echo "....................SCRIPT ENDED......................"
