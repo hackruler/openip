@@ -1,5 +1,4 @@
 # Finding all the open ports for each ip in CIDR
-# Run httpx on all the ip's found with their respective ports.
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -8,7 +7,7 @@ NC='\033[0m' # No Color
 
 
 show_help() {
-    echo "   Usage: bash cidr.sh -l <cidr file> [options]"
+    echo "   Usage: bash openip.sh -l <cidr file> [options]"
     echo ""
     echo "   Options:"
     echo "   -h                          Help Menu"
@@ -66,17 +65,17 @@ fi
 }
 
 if [ ! -f "$input_file" ]; then
-    echo -e "${RED}Error: The specified input file '$input_file' is not present in the directory.${NC}"
+    echo -e "${RED}Error: The specified input file '$input_file' is not present in the directory.${NC}";
     exit 0
 fi
 
 if [ ! -s "$input_file" ]; then
-    echo -e "${RED}Error: The specified input file '$input_file' is empty.${NC}"
+    echo -e "${RED}Error: The specified input file '$input_file' is empty.${NC}";
     exit 0
 fi
 
 if [ ! -r "$input_file" ]; then
-    echo -e "${RED}Error: The specified input file '$input_file' is not readable.${NC}"
+    echo -e "${RED}Error: The specified input file '$input_file' is not readable.${NC}";
     exit 0
 fi
 
@@ -86,10 +85,6 @@ echo -e "${GREEN}[**]" $(cat masscan.txt | wc -l)" IP's found with open port.${N
 cat masscan.txt | cut -d " " -f6 | sed 's/n//g' | sed 's/^ *\|\ *$//g' | sed 's/$/:/' | tee -a ip_add.txt > /dev/null;
 cat masscan.txt | cut -d "/" -f1 | cut -d 't' -f2 | sed 's/^ *//g' | tee -a port.txt > /dev/null;
 
-
-
-
-
 {
     [ $(cat masscan.txt | wc -l) != 0 ] && 
     echo -e "${YELLOW}[!] Combining ip's with their respective ports.${NC}"
@@ -98,9 +93,10 @@ cat masscan.txt | cut -d "/" -f1 | cut -d 't' -f2 | sed 's/^ *//g' | tee -a port
 
 
 { 
-    [ -z "$output_file" ] && [ $(cat masscan.txt | wc -l) != 0 ] && 
+    [ -z "$output_file" ] && 
     paste ip_add.txt port.txt | sed 's/\t//g' || 
     paste ip_add.txt port.txt | sed 's/\t//g' | tee -a "$output_file" > /dev/null; 
+    echo -e "${GREEN}[*] ........... SCRIPT ENDED .................${NC}"
 }
 
 rm ip_add.txt port.txt masscan.txt;
