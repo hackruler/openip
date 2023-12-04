@@ -23,7 +23,6 @@ show_help() {
 }
 cexit() {
     echo -e "${RED}[!] Script interrupted. Exiting...${NC}"
-    [ -e masscan.txt ] && rm -f masscan.txt
     [ -e ip_add.txt ] && rm -f ip_add.txt
     [ -e port.txt ] && rm -f port.txt
     exit "$1"
@@ -103,7 +102,7 @@ else
     paste ip_add.txt port.txt | sed 's/\t//g' | httpx -silent $probes_option | tee -a "$output_file"
 fi
 
-rm ip_add.txt port.txt masscan.txt;
+rm ip_add.txt port.txt;
 if [ -z "$output_file" ]; then
     echo -e "${GREEN}[*] ........... SCRIPT ENDED .................${NC}"
 else
